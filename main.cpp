@@ -1,5 +1,6 @@
 // COMSC210 | Lab 25 | Tanmayee Chalamalasetti
 // IDE Used: VS Code
+#include <algorithm>
 #include <chrono>
 #include <fstream>
 #include <iomanip>
@@ -8,10 +9,10 @@
 #include <set>
 #include <string>
 #include <vector>
-#include <algorithm>
-#include <iterator>
 using namespace std;
 using namespace std::chrono;
+
+const int W = 12;
 
 int main() {
   string file = "codes.txt";
@@ -114,18 +115,39 @@ int main() {
   auto end_sd = high_resolution_clock::now();
   auto set_delete = duration_cast<microseconds>(end_sd - start_sd);
 
-  cout << "Operation    Vector      List       Set\n";
-  cout << "Read" << setw(13) << duration_v.count() << setw(12)
-       << duration_l.count() << setw(12) << duration_s.count() << "\n";
-  cout << "Sort" << setw(14) << vector_sort.count() << setw(12)
-       << list_sort.count() << setw(8) << s_sort << "\n";
-  cout << "Insert" << setw(10) << vector_insert.count() << setw(12)
-       << list_insert.count() << setw(11) << set_insert.count() << "\n";
-  cout << "Delete" << setw(10) << vector_delete.count() << setw(12)
-       << list_delete.count() << setw(11) << set_delete.count() << "\n";
+  // from lab 25
+  //  cout << "Operation    Vector      List       Set\n";
+  //  cout << "Read" << setw(13) << duration_v.count() << setw(12)
+  //       << duration_l.count() << setw(12) << duration_s.count() << "\n";
+  //  cout << "Sort" << setw(14) << vector_sort.count() << setw(12)
+  //       << list_sort.count() << setw(8) << s_sort << "\n";
+  //  cout << "Insert" << setw(10) << vector_insert.count() << setw(12)
+  //       << list_insert.count() << setw(11) << set_insert.count() << "\n";
+  //  cout << "Delete" << setw(10) << vector_delete.count() << setw(12)
+  //   << list_delete.count() << setw(11) << set_delete.count() << "\n";
+
+  // New output method
+  string labels[] = {"Read", "Sort", "Insert", "Delete"};
+  string colV[] = {
+      to_string(duration_v.count()), to_string(vector_sort.count()),
+      to_string(vector_insert.count()), to_string(vector_delete.count())};
+
+  string colL[] = {to_string(duration_l.count()), to_string(list_sort.count()),
+                   to_string(list_insert.count()),
+                   to_string(list_delete.count())};
+
+  string colS[] = {to_string(duration_s.count()), to_string(s_sort),
+                   to_string(set_insert.count()),
+                   to_string(set_delete.count())};
+
+  cout << left << setw(W) << "Operation" << right << setw(W) << "Vector"
+       << setw(W) << "List" << setw(W) << "Set" << "\n";
+  for (int i = 0; i < 4; ++i) {
+    cout << left << setw(W) << labels[i] << right << setw(W) << colV[i]
+         << setw(W) << colL[i] << setw(W) << colS[i] << "\n";
+  }
   return 0;
 }
- 
 
 /* syntax examples:
 auto start = high_resolution_clock::now()
