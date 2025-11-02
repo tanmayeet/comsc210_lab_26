@@ -8,6 +8,8 @@
 #include <set>
 #include <string>
 #include <vector>
+#include <algorithm>
+#include <iterator>
 using namespace std;
 using namespace std::chrono;
 
@@ -123,6 +125,7 @@ int main() {
        << list_delete.count() << setw(11) << set_delete.count() << "\n";
   return 0;
 }
+ 
 
 /* syntax examples:
 auto start = high_resolution_clock::now()
