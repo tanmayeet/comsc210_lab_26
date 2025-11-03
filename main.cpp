@@ -13,46 +13,52 @@ using namespace std;
 using namespace std::chrono;
 
 const int structs = 3;
-const int rows = 4, cols = 3;
+const int rows = 4, cols = 3, depth = 3;
 const int W = 10;
 
 int main() {
   string file = "codes.txt";
+  int results[rows][cols][depth];
   string s;
+  vector<string> data_vector;
+  list<string> data_list;
+  set<string> data_set;
+
   // Race 1: Reading
-
   // vector
-  auto start_v = high_resolution_clock::now();
-  ifstream fin1(file);
-  vector<string> v;
-  while (fin1 >> s) {
-    v.push_back(s);
-  }
-  fin1.close();
-  auto end_v = high_resolution_clock::now();
-  auto duration_v = duration_cast<microseconds>(end_v - start_v);
+  for (int i = 0; i < structs; i++) {
+    auto start_v = high_resolution_clock::now();
+    ifstream fin1(file);
+    vector<string> v;
+    while (fin1 >> s) {
+      v.push_back(s);
+    }
+    fin1.close();
+    auto end_v = high_resolution_clock::now();
+    auto duration_v = duration_cast<microseconds>(end_v - start_v);
 
-  // list
-  auto start_l = high_resolution_clock::now();
-  ifstream fin2(file);
-  list<string> l;
-  while (fin2 >> s) {
-    l.push_back(s);
-  }
-  fin2.close();
-  auto end_l = high_resolution_clock::now();
-  auto duration_l = duration_cast<microseconds>(end_l - start_l);
+    // list
+    auto start_l = high_resolution_clock::now();
+    ifstream fin2(file);
+    list<string> l;
+    while (fin2 >> s) {
+      l.push_back(s);
+    }
+    fin2.close();
+    auto end_l = high_resolution_clock::now();
+    auto duration_l = duration_cast<microseconds>(end_l - start_l);
 
-  // set
-  auto start_s = high_resolution_clock::now();
-  ifstream fin3(file);
-  set<string> st;
-  while (fin3 >> s) {
-    st.insert(s);
+    // set
+    auto start_s = high_resolution_clock::now();
+    ifstream fin3(file);
+    set<string> st;
+    while (fin3 >> s) {
+      st.insert(s);
+    }
+    fin3.close();
+    auto end_s = high_resolution_clock::now();
+    auto duration_s = duration_cast<microseconds>(end_s - start_s);
   }
-  fin3.close();
-  auto end_s = high_resolution_clock::now();
-  auto duration_s = duration_cast<microseconds>(end_s - start_s);
 
   // Race 2: Sorting
 
