@@ -20,6 +20,7 @@ const int W = 10;
 int main() {
   string file = "codes.txt";
   int results[sims][rows][cols];
+
   string s;
   vector<string> v;
   list<string> l;
