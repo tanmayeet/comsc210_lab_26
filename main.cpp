@@ -13,6 +13,7 @@
 using namespace std;
 using namespace std::chrono;
 
+// Constants used throughout code
 const int structs = 3;
 const int rows = 4, cols = 3;
 const int sims = 15;
@@ -20,14 +21,18 @@ const int W = 10;
 
 int main() {
   string file = "codes.txt";
+  // Stores tiiming results for each sim, operation, and data structure
   int results[sims][rows][cols];
   int avg[rows][cols] = {0};
   string s;
+
+  // Three different data structures
   vector<string> v;
   list<string> l;
   set<string> st;
 
   for (int run = 0; run < sims; run++) {
+    // Clears containers before each simulation run
     v.clear();
     l.clear();
     st.clear();
@@ -168,6 +173,8 @@ int main() {
     }
   }
 
+  // Adds the total sum from each element of 3D array results into the 2D array
+  // avg
   for (int s = 0; s < sims; s++) {
     for (int i = 0; i < rows; i++) {
       for (int j = 0; j < cols; j++) {
@@ -176,13 +183,14 @@ int main() {
     }
   }
 
+  // Computes average time for each operation and structure for every sim
   for (int i = 0; i < rows; i++) {
     for (int j = 0; j < cols; j++) {
       avg[i][j] /= sims;
     }
   }
 
-  // New output method
+  // Output code
   string labels[] = {"Read", "Sort", "Insert", "Delete"};
   cout << "Number of simulations: " << sims << endl;
   cout << setw(W) << "Operation" << setw(W) << "Vector" << setw(W) << "List"
