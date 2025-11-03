@@ -20,13 +20,12 @@ const int W = 10;
 int main() {
   string file = "codes.txt";
   int results[sims][rows][cols];
-
   string s;
-  vector<string> v;
-  list<string> l;
-  set<string> st;
 
   for (int run = 0; run < sims; run++) {
+    vector<string> v;
+    list<string> l;
+    set<string> st;
     // Race 1: Reading
     for (int i = 0; i < structs; i++) {
       // vector
@@ -38,7 +37,7 @@ int main() {
             v.push_back(s);
             auto end = chrono::high_resolution_clock::now();
             auto duration = duration_cast<microseconds>(end - start);
-            results[0][i][0] = duration.count();
+            results[run][i][0] = duration.count();
             break;
           }
         }
@@ -75,17 +74,20 @@ int main() {
           sort(v.begin(), v.end());
           auto end = chrono::high_resolution_clock::now();
           auto duration = duration_cast<microseconds>(end - start);
+          results[0][i][0] = duration.count();
+          break;
         }
         case 1: {
           // list
           l.sort();
           auto end = chrono::high_resolution_clock::now();
           auto duration = duration_cast<microseconds>(end - start);
+          results[0][i][0] = duration.count();
           break;
         }
         case 2: {
           // set
-          long long s_sort = -1;
+          results[0][i][0] = -1;
           break;
         }
       }
@@ -100,6 +102,8 @@ int main() {
           v.insert(v.begin() + (v.size() / 2), "TESTCODE");
           auto end = high_resolution_clock::now();
           auto duration = duration_cast<microseconds>(end - start);
+          results[0][i][0] = duration.count();
+          break;
         }
         case 1: {
           // list
@@ -108,12 +112,16 @@ int main() {
           l.insert(mid, "TESTCODE");
           auto end = chrono::high_resolution_clock::now();
           auto duration = duration_cast<microseconds>(end - start);
+          results[0][i][0] = duration.count();
+          break;
         }
         case 2: {
           // set
           st.insert("TESTCODE");
           auto end = chrono::high_resolution_clock::now();
           auto duration = duration_cast<microseconds>(end - start);
+          results[0][i][0] = duration.count();
+          break;
         }
       }
     }
@@ -126,6 +134,8 @@ int main() {
           v.erase(v.begin() + (v.size() / 2));
           auto end = chrono::high_resolution_clock::now();
           auto duration = duration_cast<microseconds>(end - start);
+          results[0][i][0] = duration.count();
+          break;
         }
         case 1: {
           // list
@@ -134,6 +144,8 @@ int main() {
           l.erase(mid);
           auto end = chrono::high_resolution_clock::now();
           auto duration = duration_cast<microseconds>(end - start);
+          results[0][i][0] = duration.count();
+          break;
         }
         case 2: {
           // set
@@ -142,6 +154,8 @@ int main() {
           st.erase(it);
           auto end = chrono::high_resolution_clock::now();
           auto duration = duration_cast<microseconds>(end - start);
+          results[0][i][0] = duration.count();
+          break;
         }
       }
     }
