@@ -22,11 +22,14 @@ int main() {
   int results[sims][rows][cols];
   int avg[rows][cols] = {0};
   string s;
+  vector<string> v;
+  list<string> l;
+  set<string> st;
 
   for (int run = 0; run < sims; run++) {
-    vector<string> v;
-    list<string> l;
-    set<string> st;
+    v.clear();
+    l.clear();
+    st.clear();
 
     // Race 1: Reading
     for (int i = 0; i < structs; i++) {
