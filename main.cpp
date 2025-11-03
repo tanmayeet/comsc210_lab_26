@@ -31,37 +31,37 @@ int main() {
     // Race 1: Reading
     for (int i = 0; i < structs; i++) {
       // vector
-      auto start = chrono::high_resolution_clock::now();
       ifstream fin(file);
+      auto start = chrono::high_resolution_clock::now();
       switch (i) {
         case 0: {
           while (fin >> s) {
             v.push_back(s);
-            auto end = chrono::high_resolution_clock::now();
-            auto duration = duration_cast<microseconds>(end - start);
-            results[run][0][i] = duration.count();
-            break;
           }
+          auto end = chrono::high_resolution_clock::now();
+          auto duration = duration_cast<microseconds>(end - start);
+          results[run][0][i] = duration.count();
+          break;
         }
         case 1: {
           // list
           while (fin >> s) {
             l.push_back(s);
-            auto end = chrono::high_resolution_clock::now();
-            auto duration = duration_cast<microseconds>(end - start);
-            results[run][0][i] = duration.count();
-            break;
           }
+          auto end = chrono::high_resolution_clock::now();
+          auto duration = duration_cast<microseconds>(end - start);
+          results[run][0][i] = duration.count();
+          break;
         }
         case 2: {
           // set
           while (fin >> s) {
             st.insert(s);
-            auto end = chrono::high_resolution_clock::now();
-            auto duration = duration_cast<microseconds>(end - start);
-            results[run][0][i] = duration.count();
-            break;
           }
+          auto end = chrono::high_resolution_clock::now();
+          auto duration = duration_cast<microseconds>(end - start);
+          results[run][0][i] = duration.count();
+          break;
         }
       }
       fin.close();
@@ -79,6 +79,7 @@ int main() {
           results[run][1][i] = duration.count();
           break;
         }
+
         case 1: {
           // list
           l.sort();
@@ -109,9 +110,9 @@ int main() {
         }
         case 1: {
           // list
-          auto mid = l.begin();
-          advance(mid, (l.size() / 2));
-          l.insert(mid, "TESTCODE");
+          auto it = l.begin();
+          advance(it, (l.size() / 2));
+          l.insert(it, "TESTCODE");
           auto end = chrono::high_resolution_clock::now();
           auto duration = duration_cast<microseconds>(end - start);
           results[run][2][i] = duration.count();
