@@ -185,10 +185,10 @@ int main() {
   // New output method
   string labels[] = {"Read", "Sort", "Insert", "Delete"};
   cout << "Number of simulations: " << sims << endl;
-  cout << "Operation" << setw(W) << "Vector" << setw(W) << "List" << setw(W)
-       << "Set" << endl;
+  cout << setw(W) << "Operation" << setw(W) << "Vector" << setw(W) << "List"
+       << setw(W) << "Set" << endl;
   for (int i = 0; i < 4; ++i) {
-    cout << left << setw(W) << labels[i];
+    cout << setw(W) << labels[i];
     for (int j = 0; j < cols; j++) {
       cout << setw(W) << avg[i][j];
     }
