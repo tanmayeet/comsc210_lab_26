@@ -163,17 +163,29 @@ int main() {
     }
   }
 
-  for (int i = 0; i < sims; i++) {
+  for (int s = 0; s < sims; s++) {
+    for (int i = 0; i < rows; i++) {
+      for (int j = 0; j < cols; j++) {
+        avg[i][j] += (results[s][i][j]);
+      }
+    }
+  }
+
+  for (int i = 0; i < rows; i++) {
+    for (int j = 0; j < cols; j++) {
+      avg[i][j] /= sims;
+    }
   }
 
   // New output method
   string labels[] = {"Read", "Sort", "Insert", "Delete"};
+  cout << "Number of simulations: " << sims << endl;
   cout << setw(W) << "Operation" << setw(W) << "Vector" << setw(W) << "List"
        << setw(W) << "Set" << endl;
   for (int i = 0; i < 4; ++i) {
     cout << left << setw(W) << labels[i];
     for (int j = 0; j < cols; j++) {
-      cout << setw(W) << results[i][j][0] << endl;
+      cout << setw(W) << avg[i][j] << endl;
     }
   }
   return 0;
