@@ -76,7 +76,7 @@ int main() {
           sort(v.begin(), v.end());
           auto end = chrono::high_resolution_clock::now();
           auto duration = duration_cast<microseconds>(end - start);
-          results[run][i][0] = duration.count();
+          results[run][i][1] = duration.count();
           break;
         }
         case 1: {
@@ -84,12 +84,12 @@ int main() {
           l.sort();
           auto end = chrono::high_resolution_clock::now();
           auto duration = duration_cast<microseconds>(end - start);
-          results[run][i][0] = duration.count();
+          results[run][i][1] = duration.count();
           break;
         }
         case 2: {
           // set
-          results[run][i][0] = -1;
+          results[run][i][1] = -1;
           break;
         }
       }
@@ -104,7 +104,7 @@ int main() {
           v.insert(v.begin() + (v.size() / 2), "TESTCODE");
           auto end = high_resolution_clock::now();
           auto duration = duration_cast<microseconds>(end - start);
-          results[run][i][0] = duration.count();
+          results[run][i][2] = duration.count();
           break;
         }
         case 1: {
@@ -114,7 +114,7 @@ int main() {
           l.insert(mid, "TESTCODE");
           auto end = chrono::high_resolution_clock::now();
           auto duration = duration_cast<microseconds>(end - start);
-          results[run][i][0] = duration.count();
+          results[run][i][2] = duration.count();
           break;
         }
         case 2: {
@@ -122,7 +122,7 @@ int main() {
           st.insert("TESTCODE");
           auto end = chrono::high_resolution_clock::now();
           auto duration = duration_cast<microseconds>(end - start);
-          results[run][i][0] = duration.count();
+          results[run][i][2] = duration.count();
           break;
         }
       }
@@ -136,7 +136,7 @@ int main() {
           v.erase(v.begin() + (v.size() / 2));
           auto end = chrono::high_resolution_clock::now();
           auto duration = duration_cast<microseconds>(end - start);
-          results[run][i][0] = duration.count();
+          results[run][i][3] = duration.count();
           break;
         }
         case 1: {
@@ -146,7 +146,7 @@ int main() {
           l.erase(mid);
           auto end = chrono::high_resolution_clock::now();
           auto duration = duration_cast<microseconds>(end - start);
-          results[run][i][0] = duration.count();
+          results[run][i][3] = duration.count();
           break;
         }
         case 2: {
@@ -156,7 +156,7 @@ int main() {
           st.erase(it);
           auto end = chrono::high_resolution_clock::now();
           auto duration = duration_cast<microseconds>(end - start);
-          results[run][i][0] = duration.count();
+          results[run][i][3] = duration.count();
           break;
         }
       }
@@ -185,7 +185,8 @@ int main() {
   for (int i = 0; i < 4; ++i) {
     cout << left << setw(W) << labels[i];
     for (int j = 0; j < cols; j++) {
-      cout << setw(W) << avg[i][j] << endl;
+      cout << setw(W) << avg[i][j];
+      cout << endl;
     }
   }
   return 0;
