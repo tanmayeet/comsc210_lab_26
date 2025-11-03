@@ -1,4 +1,4 @@
-// COMSC210 | Lab 25 | Tanmayee Chalamalasetti
+// COMSC210 | Lab 26 | Tanmayee Chalamalasetti
 // IDE Used: VS Code
 #include <algorithm>
 #include <chrono>
@@ -12,7 +12,9 @@
 using namespace std;
 using namespace std::chrono;
 
-const int W = 12;
+const int structs = 3;
+const int rows = 4, cols = 3;
+const int W = 10;
 
 int main() {
   string file = "codes.txt";
