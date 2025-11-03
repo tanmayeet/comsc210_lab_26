@@ -39,7 +39,7 @@ int main() {
             v.push_back(s);
             auto end = chrono::high_resolution_clock::now();
             auto duration = duration_cast<microseconds>(end - start);
-            results[run][i][0] = duration.count();
+            results[run][0][i] = duration.count();
             break;
           }
         }
@@ -49,7 +49,7 @@ int main() {
             l.push_back(s);
             auto end = chrono::high_resolution_clock::now();
             auto duration = duration_cast<microseconds>(end - start);
-            results[run][i][0] = duration.count();
+            results[run][0][i] = duration.count();
             break;
           }
         }
@@ -59,7 +59,7 @@ int main() {
             st.insert(s);
             auto end = chrono::high_resolution_clock::now();
             auto duration = duration_cast<microseconds>(end - start);
-            results[run][i][0] = duration.count();
+            results[run][0][i] = duration.count();
             break;
           }
         }
@@ -76,7 +76,7 @@ int main() {
           sort(v.begin(), v.end());
           auto end = chrono::high_resolution_clock::now();
           auto duration = duration_cast<microseconds>(end - start);
-          results[run][i][1] = duration.count();
+          results[run][1][i] = duration.count();
           break;
         }
         case 1: {
@@ -84,12 +84,12 @@ int main() {
           l.sort();
           auto end = chrono::high_resolution_clock::now();
           auto duration = duration_cast<microseconds>(end - start);
-          results[run][i][1] = duration.count();
+          results[run][1][i] = duration.count();
           break;
         }
         case 2: {
           // set
-          results[run][i][1] = -1;
+          results[run][1][i] = -1;
           break;
         }
       }
@@ -104,7 +104,7 @@ int main() {
           v.insert(v.begin() + (v.size() / 2), "TESTCODE");
           auto end = high_resolution_clock::now();
           auto duration = duration_cast<microseconds>(end - start);
-          results[run][i][2] = duration.count();
+          results[run][2][i] = duration.count();
           break;
         }
         case 1: {
@@ -114,7 +114,7 @@ int main() {
           l.insert(mid, "TESTCODE");
           auto end = chrono::high_resolution_clock::now();
           auto duration = duration_cast<microseconds>(end - start);
-          results[run][i][2] = duration.count();
+          results[run][2][i] = duration.count();
           break;
         }
         case 2: {
@@ -122,7 +122,7 @@ int main() {
           st.insert("TESTCODE");
           auto end = chrono::high_resolution_clock::now();
           auto duration = duration_cast<microseconds>(end - start);
-          results[run][i][2] = duration.count();
+          results[run][2][i] = duration.count();
           break;
         }
       }
@@ -136,7 +136,7 @@ int main() {
           v.erase(v.begin() + (v.size() / 2));
           auto end = chrono::high_resolution_clock::now();
           auto duration = duration_cast<microseconds>(end - start);
-          results[run][i][3] = duration.count();
+          results[run][3][i] = duration.count();
           break;
         }
         case 1: {
@@ -146,7 +146,7 @@ int main() {
           l.erase(mid);
           auto end = chrono::high_resolution_clock::now();
           auto duration = duration_cast<microseconds>(end - start);
-          results[run][i][3] = duration.count();
+          results[run][3][i] = duration.count();
           break;
         }
         case 2: {
@@ -156,7 +156,7 @@ int main() {
           st.erase(it);
           auto end = chrono::high_resolution_clock::now();
           auto duration = duration_cast<microseconds>(end - start);
-          results[run][i][3] = duration.count();
+          results[run][3][i] = duration.count();
           break;
         }
       }
@@ -166,7 +166,7 @@ int main() {
   for (int s = 0; s < sims; s++) {
     for (int i = 0; i < rows; i++) {
       for (int j = 0; j < cols; j++) {
-        avg[i][j] += (results[s][i][j]);
+        avg[i][j] += results[s][i][j];
       }
     }
   }
@@ -180,14 +180,14 @@ int main() {
   // New output method
   string labels[] = {"Read", "Sort", "Insert", "Delete"};
   cout << "Number of simulations: " << sims << endl;
-  cout << setw(W) << "Operation" << setw(W) << "Vector" << setw(W) << "List"
-       << setw(W) << "Set" << endl;
+  cout << "Operation" << setw(W) << "Vector" << setw(W) << "List" << setw(W)
+       << "Set" << endl;
   for (int i = 0; i < 4; ++i) {
     cout << left << setw(W) << labels[i];
     for (int j = 0; j < cols; j++) {
       cout << setw(W) << avg[i][j];
-      cout << endl;
     }
+    cout << endl;
   }
   return 0;
 }
