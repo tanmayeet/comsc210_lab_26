@@ -20,12 +20,14 @@ const int W = 10;
 int main() {
   string file = "codes.txt";
   int results[sims][rows][cols];
+  int avg[rows][cols] = {0};
   string s;
 
   for (int run = 0; run < sims; run++) {
     vector<string> v;
     list<string> l;
     set<string> st;
+
     // Race 1: Reading
     for (int i = 0; i < structs; i++) {
       // vector
@@ -47,7 +49,7 @@ int main() {
             l.push_back(s);
             auto end = chrono::high_resolution_clock::now();
             auto duration = duration_cast<microseconds>(end - start);
-            results[0][i][0] = duration.count();
+            results[run][i][0] = duration.count();
             break;
           }
         }
@@ -57,7 +59,7 @@ int main() {
             st.insert(s);
             auto end = chrono::high_resolution_clock::now();
             auto duration = duration_cast<microseconds>(end - start);
-            results[0][i][0] = duration.count();
+            results[run][i][0] = duration.count();
             break;
           }
         }
@@ -74,7 +76,7 @@ int main() {
           sort(v.begin(), v.end());
           auto end = chrono::high_resolution_clock::now();
           auto duration = duration_cast<microseconds>(end - start);
-          results[0][i][0] = duration.count();
+          results[run][i][0] = duration.count();
           break;
         }
         case 1: {
@@ -82,12 +84,12 @@ int main() {
           l.sort();
           auto end = chrono::high_resolution_clock::now();
           auto duration = duration_cast<microseconds>(end - start);
-          results[0][i][0] = duration.count();
+          results[run][i][0] = duration.count();
           break;
         }
         case 2: {
           // set
-          results[0][i][0] = -1;
+          results[run][i][0] = -1;
           break;
         }
       }
@@ -102,7 +104,7 @@ int main() {
           v.insert(v.begin() + (v.size() / 2), "TESTCODE");
           auto end = high_resolution_clock::now();
           auto duration = duration_cast<microseconds>(end - start);
-          results[0][i][0] = duration.count();
+          results[run][i][0] = duration.count();
           break;
         }
         case 1: {
@@ -112,7 +114,7 @@ int main() {
           l.insert(mid, "TESTCODE");
           auto end = chrono::high_resolution_clock::now();
           auto duration = duration_cast<microseconds>(end - start);
-          results[0][i][0] = duration.count();
+          results[run][i][0] = duration.count();
           break;
         }
         case 2: {
@@ -120,7 +122,7 @@ int main() {
           st.insert("TESTCODE");
           auto end = chrono::high_resolution_clock::now();
           auto duration = duration_cast<microseconds>(end - start);
-          results[0][i][0] = duration.count();
+          results[run][i][0] = duration.count();
           break;
         }
       }
@@ -134,7 +136,7 @@ int main() {
           v.erase(v.begin() + (v.size() / 2));
           auto end = chrono::high_resolution_clock::now();
           auto duration = duration_cast<microseconds>(end - start);
-          results[0][i][0] = duration.count();
+          results[run][i][0] = duration.count();
           break;
         }
         case 1: {
@@ -144,7 +146,7 @@ int main() {
           l.erase(mid);
           auto end = chrono::high_resolution_clock::now();
           auto duration = duration_cast<microseconds>(end - start);
-          results[0][i][0] = duration.count();
+          results[run][i][0] = duration.count();
           break;
         }
         case 2: {
@@ -154,11 +156,14 @@ int main() {
           st.erase(it);
           auto end = chrono::high_resolution_clock::now();
           auto duration = duration_cast<microseconds>(end - start);
-          results[0][i][0] = duration.count();
+          results[run][i][0] = duration.count();
           break;
         }
       }
     }
+  }
+
+  for (int i = 0; i < sims; i++) {
   }
 
   // New output method
@@ -168,7 +173,7 @@ int main() {
   for (int i = 0; i < 4; ++i) {
     cout << left << setw(W) << labels[i];
     for (int j = 0; j < cols; j++) {
-      cout << setw(W) << results[i][j][k] << endl;
+      cout << setw(W) << results[i][j][0] << endl;
     }
   }
   return 0;
